@@ -44,12 +44,12 @@ var commandMap = map[byte]fn{
 	'.': printValueAtPointer,
 }
 
-func (b *BrainFuck) AddCommand(command byte, function fn) (error, bool) {
+func (b *BrainFuck) AddCommand(command byte, function fn) error {
 	if _, ok := commandMap[command]; ok {
-		return fmt.Errorf("command is already exist"), false
+		return fmt.Errorf("command is already exist")
 	}
 	commandMap[command] = function
-	return nil, true
+	return nil
 }
 
 func (b *BrainFuck) ApplyCommands() {

@@ -1,7 +1,6 @@
 package main
 
 import (
-	brainfuck "brainfuck-interpreter/application"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -16,11 +15,14 @@ func main() {
 		}
 
 		instructions := string(file)
-		brainFuck := brainfuck.New(instructions)
+		brainFuck := New(instructions)
 		brainFuck.ApplyCommands()
-		brainFuck.AddCommand('$', func(brainfuck *brainfuck.BrainFuck) {
+		err = brainFuck.AddCommand('$', func(brainfuck *BrainFuck) {
 			val := brainFuck.Cells[brainFuck.CellPointer]
 			brainFuck.Cells[brainFuck.CellPointer] = val * val
 		})
+		if err != nil {
+			fmt.Printf("an error occured when add custom command: %v", err)
+		}
 	}
 }
