@@ -10,7 +10,7 @@
 and also user can define
 */
 
-package brainfuck
+package main
 
 import (
 	"bufio"
